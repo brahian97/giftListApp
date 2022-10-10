@@ -1,0 +1,32 @@
+.card {
+  border: 1px black solid;
+  transition: transform .2s;
+
+  &-body {
+    align-items: center;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-width: 150px;
+    width: 15vw;
+
+    svg {
+      margin: 5px;
+    }
+  }
+
+  &-footer {
+    align-items: center;
+    display: flex;
+    justify-content: space-around;
+  }
+
+  &:hover {
+    transform: scale(1.05);
+  }
+}
+
+.card-deck {
+  margin: 15px 20px;
+}

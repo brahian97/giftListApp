@@ -1,0 +1,20 @@
+@mixin form-input {
+  border: 0;
+  border-bottom: 1px solid black;
+  outline: none;
+}
+
+.input {
+  @include form-input;
+
+  &-title {
+    @include form-input;
+    font-size: 2rem;
+    font-weight: bold;
+  }
+
+  &-span {
+    background-color: lightgrey;
+    padding: 5px 0;
+  }
+}

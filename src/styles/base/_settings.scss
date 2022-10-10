@@ -1,0 +1,19 @@
+// Colors
+$primary: #F95738;
+$shadow-primary: #EE964B;
+$ligth-grey: #F4D35E;
+$lemon: #FAF0CA;
+$secondary: #0D3B66;
+// Boton Google
+$white: #fff;
+$google-blue: #4285f4;
+$button-active-blue: #1669f2;
+//Media query
+$small: '320px';
+$medium: '768px';
+$large: '1200px';
+//Configurationss
+$enable-shadows: true;
+$prefix: "mo-";
+
+@import "~bootstrap/scss/bootstrap";
