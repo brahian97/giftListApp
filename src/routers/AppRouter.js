@@ -35,7 +35,7 @@ export const AppRouter = () => {
     return <LoadingScreen />
   } else {
     return (
-      <BrowserRouter basename={process.env.PUBLIC_URL}>
+      <BrowserRouter>
         <Routes>
           <Route path='/login' element={<PublicRouter isLoggedIn={ isLoggedIn } component={LoginScreen} />} />
           <Route path='/register' element={<PublicRouter isLoggedIn={ isLoggedIn } component={RegisterScreen} />} />
