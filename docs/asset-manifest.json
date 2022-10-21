@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/giftListApp/static/css/main.c1e9b893.css",
+    "main.js": "/giftListApp/static/js/main.fbcca081.js",
+    "static/media/gift.jpg": "/giftListApp/static/media/gift.d5409f1f04bac26cf7bc.jpg",
+    "index.html": "/giftListApp/index.html",
+    "main.c1e9b893.css.map": "/giftListApp/static/css/main.c1e9b893.css.map",
+    "main.fbcca081.js.map": "/giftListApp/static/js/main.fbcca081.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.c1e9b893.css",
+    "static/js/main.fbcca081.js"
+  ]
+}
