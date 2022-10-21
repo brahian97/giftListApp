@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Navigate } from "react-router-dom";
-import { LoginScreen } from "../Components/login/LoginScreen";
-import { RegisterScreen } from "../Components/register/RegisterScreen";
-import { ResetPasswordScreen } from "../Components/resetPassword/ResetPasswordScreen";
+import { LoginScreen } from "../components/login/LoginScreen";
+import { RegisterScreen } from "../components/register/RegisterScreen";
+import { ResetPasswordScreen } from "../components/resetPassword/ResetPasswordScreen";
 
 export const AuthRouter = () => {
   return ( 

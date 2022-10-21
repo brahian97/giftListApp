@@ -16,3 +16,11 @@ export const startLoading = () => ({
 export const finishLoading = () => ({
     type: types.uiFinishLoading,
 })
+
+export const startLoadingGiftList = () => ({
+  type: types.uiStartLoadingGiftList
+})
+
+export const finishLoadingGiftList = () => ({
+  type: types.uiFinishLoadingGiftList
+})

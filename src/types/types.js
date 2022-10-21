@@ -7,6 +7,8 @@ export const types = {
   uiRemoveError: '[UI] Remove Error',
   uiStartLoading: '[UI] Start Loading',
   uiFinishLoading: '[UI] Finish Loading',
+  uiStartLoadingGiftList: '[UI] Start Loading Gift List',
+  uiFinishLoadingGiftList: '[UI] Finish Loading Gift List',
 
   giftListAdd: '[GiftList] Add',
   giftListRemove: '[GiftList] Remove',

@@ -9,7 +9,6 @@ export const GiftsScreen = () => {
   
   return (
     <div>
-      <PageHeader />
       {
         active ? <GiftList giftList={active} /> : <GiftLists />
       }

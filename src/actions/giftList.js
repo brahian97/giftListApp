@@ -1,7 +1,8 @@
 import Swal from "sweetalert2"
 import { db } from "../firebase/firebaseConfig"
-import { loadGiftList } from "../helpers/loadGiftList"
+import { loadGiftList } from "../helpers/giftListHelpers"
 import { types } from "../types/types"
+import { finishLoadingGiftList, startLoadingGiftList } from "./ui"
 
 export const addNewGiftList = () => {
   return async (dispatch, getState) => {
@@ -11,6 +12,7 @@ export const addNewGiftList = () => {
       title: 'Nueva lista',
       isPrivate: true,
       createdAt: new Date().getTime(),
+      updatedAt: new Date().getTime(),
       gifts: []
     }
 
@@ -30,10 +32,12 @@ export const activeGiftList = (id, giftList) => ({
 
 export const startLoadingGiftLists = () => {
   return async (dispatch, getState) => {
+      dispatch(startLoadingGiftList())
       const { uid } = getState().auth
       const giftLists = await loadGiftList(uid)
 
       dispatch(setGiftLists(giftLists))
+      dispatch(finishLoadingGiftList())
   }
 }
 
