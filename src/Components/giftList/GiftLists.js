@@ -1,17 +1,21 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { addNewGiftList } from '../../actions/giftList';
 import { GiftListCard } from './GiftListCard';
+import { LoadingScreen } from '../ui/LoadingScreen';
 
 export const GiftLists = () => {
 
   const { giftLists } = useSelector(state => state.giftLists)
+  const { isLoadingGiftList } = useSelector(state => state.ui)
   const dispatch = useDispatch()
 
   const handleAddNewGiftList = () => {
     dispatch(addNewGiftList())
   }
 
-  return (
+  return isLoadingGiftList ? (
+    <LoadingScreen message='Cargando listas de regalo'/>
+  ) : (
     <div className='row row-cols-1 row-cols-md-3 g-4 card-deck'>
       <div className='col'>
         <div className='card h-100 shadow' onClick={handleAddNewGiftList}>
@@ -28,7 +32,7 @@ export const GiftLists = () => {
       </div>
       {
         giftLists.map(giftList => (
-          <GiftListCard key={giftList.id} giftList={giftList}/>
+          <GiftListCard key={giftList.id} giftList={giftList} />
         ))
       }
     </div>

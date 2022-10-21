@@ -18,3 +18,11 @@
     padding: 5px 0;
   }
 }
+
+.row-pair {
+  background-color: lighten($color: $primary, $amount: 15);
+
+  & * {
+    background-color: lighten($color: $primary, $amount: 15);
+  }
+}

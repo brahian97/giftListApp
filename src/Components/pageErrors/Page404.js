@@ -6,7 +6,7 @@ export const Page404 = () => {
       <h1 className="">404</h1>
       <h4>Página no encontrada</h4>
       <p>No se encontró lo que buscabas</p>
-      <Link to='/home' className="btn btn-primary">Ir al inicio</Link>
+      <Link to='/' className="btn btn-primary">Ir al inicio</Link>
     </div>
   )
 }
