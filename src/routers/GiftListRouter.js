@@ -1,18 +1,19 @@
 import { Route, Routes } from "react-router-dom";
-import { GiftList } from "../components/giftList/GiftList";
+import { FavoritesScreen } from "../components/favorites/FavoritesScreen";
 import { GiftsScreen } from "../components/giftList/GiftsScreen";
 import { Page404 } from "../components/pageErrors/Page404";
-import { PageHeader } from "../components/PageHeader/PageHeader";
+import { GiftListShareScreen } from "../components/share/GiftListShareScreen";
 
 export const GiftListRouter = () => {
-    return (
-      <>
-        <PageHeader />
-        <Routes>
-            <Route path='giftList/:giftListId' element={<GiftList />} />
-            <Route path='/' element={<GiftsScreen />} />
-            <Route path="*" element={<Page404 />} />
-        </Routes>
-      </>
-    );
+  console.log('-giftListRouter')
+  return (
+    <>
+      <Routes>
+        <Route path='/share/:userId/:giftListId/' element={<GiftListShareScreen />} />
+        <Route path='/favorites' element={<FavoritesScreen />} />
+        <Route path='/' element={<GiftsScreen />} />
+        <Route path="*" element={<Page404 />} />
+      </Routes>
+    </>
+  );
 }

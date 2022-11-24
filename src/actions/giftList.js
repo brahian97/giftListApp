@@ -1,8 +1,9 @@
 import Swal from "sweetalert2"
 import { db } from "../firebase/firebaseConfig"
+import { loadfavoritesGiftLists } from "../helpers/favoritesHelpers"
 import { loadGiftList } from "../helpers/giftListHelpers"
 import { types } from "../types/types"
-import { finishLoadingGiftList, startLoadingGiftList } from "./ui"
+import { finishFavoritesGiftList, finishLoadingGiftList, startLoadingFavoritesGiftList, startLoadingGiftList } from "./ui"
 
 export const addNewGiftList = () => {
   return async (dispatch, getState) => {
@@ -78,7 +79,7 @@ export const saveGiftList = (giftList) => {
 
       await db.doc(`${uid}/giftLists/lists/${giftList.id}`).update(giftListToFirestore).then(async () => {
           dispatch(refreshGiftList(giftList.id, giftList))
-          await db.doc(`${uid}/giftLists/lists/${giftList.id}`).get()
+          //await db.doc(`${uid}/giftLists/lists/${giftList.id}`).get()
           Swal.fire('Lista de regalos guardada', '', 'success')
       }).catch(err => {
           Swal.fire('Error', err.message, 'error')
@@ -107,4 +108,38 @@ const removeGiftList = (id) => ({
   payload: {
     id
   }
+})
+
+export const addGiftListAsFavorite = (userId, giftListId, giftListTitle) => {
+  return async (dispatch, getState) => {
+    const { uid } = getState().auth
+    const profileSnap = await db.doc(`${uid}/profile`).get()
+    console.log()
+
+    const newFavorite = {
+      user: userId,
+      userName: profileSnap.data().name,
+      giftList: giftListId,
+      title: giftListTitle,
+      createdAt: new Date().getTime(),
+    }
+
+    await db.collection(`${uid}/favorites/lists`).add(newFavorite)
+  }
+}
+
+export const startLoadingfavoritesGiftLists = () => {
+  return async (dispatch, getState) => {
+      dispatch(startLoadingFavoritesGiftList())
+      const { uid } = getState().auth
+      const favoritesGiftLists = await loadfavoritesGiftLists(uid)
+
+      dispatch(setFavoritesGiftLists(favoritesGiftLists))
+      dispatch(finishFavoritesGiftList())
+  }
+}
+
+const setFavoritesGiftLists = (giftLists) => ({
+  type: types.favoriteGiftListsLoad,
+  payload: giftLists
 })

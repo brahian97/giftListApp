@@ -9,6 +9,8 @@ export const types = {
   uiFinishLoading: '[UI] Finish Loading',
   uiStartLoadingGiftList: '[UI] Start Loading Gift List',
   uiFinishLoadingGiftList: '[UI] Finish Loading Gift List',
+  uiStartLoadingFavoritesGiftLists: '[UI] Start Loading favorites gift list',
+  uiFinishLoadingFavoritesGiftLists: '[UI] Finish Loading favorites gift list',
 
   giftListAdd: '[GiftList] Add',
   giftListRemove: '[GiftList] Remove',
@@ -18,4 +20,8 @@ export const types = {
   giftListActive: '[GiftList] Active',
   giftListLogoutCleaning: '[GiftList] Logout Cleaning',
   giftListAddPicture: '[GiftList] Add Picture',
+  
+  favoriteGiftListsLoad: '[GiftList] Favorite Load',
+  favoriteGiftListsAdd: '[GiftList] Favorite Add',
+  favoriteGiftListsRemove: '[GiftList] Favorite Remove',
 }

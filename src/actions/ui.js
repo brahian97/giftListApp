@@ -24,3 +24,11 @@ export const startLoadingGiftList = () => ({
 export const finishLoadingGiftList = () => ({
   type: types.uiFinishLoadingGiftList
 })
+
+export const startLoadingFavoritesGiftList = () => ({
+  type: types.uiStartLoadingFavoritesGiftLists
+})
+
+export const finishFavoritesGiftList = () => ({
+  type: types.uiFinishLoadingFavoritesGiftLists
+})

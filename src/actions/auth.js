@@ -2,6 +2,7 @@ import { types } from './../types/types'
 import { firebase, googleAuthProvider } from './../firebase/firebaseConfig'
 import { setError, startLoading, finishLoading } from './ui'
 import Swal from 'sweetalert2'
+import { db } from "../firebase/firebaseConfig"
 import withReactContent from 'sweetalert2-react-content'
 /*import { store } from './../store/store'
 import { Provider } from 'react-redux'
@@ -56,6 +57,7 @@ export const registerWithEmail = (email, password, name) => {
           showCancelButton: false,
           showConfirmButton: false
         })
+        await db.doc(`${user.uid}/profile/`).update({name: name, email: email})
         dispatch(login(user.uid, user.displayName, user.email))
       }).catch(
         err => {

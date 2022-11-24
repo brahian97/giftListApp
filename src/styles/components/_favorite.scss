@@ -1,0 +1,6 @@
+.favorite {
+  transition: transform 500ms;
+  &:hover {
+    transform: scale(1.02);
+  }
+}
