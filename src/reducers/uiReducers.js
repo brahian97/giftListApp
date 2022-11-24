@@ -1,3 +1,4 @@
+import { type } from "@testing-library/user-event/dist/type"
 import { authTypes } from "../types/authTypes"
 import { types } from "../types/types"
 
@@ -6,6 +7,7 @@ const initialState = {
   error: null,
   isAuthenticated: false,
   isLoadingGiftList: false,
+  isLoadingFavoritesGiftLists: false
 }
 
 export const uiReducer = (state = initialState, action) => {
@@ -39,6 +41,16 @@ export const uiReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoadingGiftList: false
+      }
+    case types.uiStartLoadingFavoritesGiftLists:
+      return {
+        ...state,
+        isLoadingFavoritesGiftLists: true
+      }
+    case types.uiFinishLoadingFavoritesGiftLists:
+      return {
+        ...state,
+        isLoadingFavoritesGiftLists: false
       }
     default:
       return state

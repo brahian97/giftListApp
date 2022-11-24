@@ -4,14 +4,18 @@ import { GiftList } from "./GiftList";
 import { GiftLists } from "./GiftLists";
 
 export const GiftsScreen = () => {
+  console.log('.giftsScreen')
 
   const { active } = useSelector(state => state.giftLists)
-  
+
   return (
-    <div>
-      {
-        active ? <GiftList giftList={active} /> : <GiftLists />
-      }
-    </div>
+    <>
+      <PageHeader />
+      <div>
+        {
+          active ? <GiftList giftList={active} /> : <GiftLists />
+        }
+      </div>
+    </>
   )
 }

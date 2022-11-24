@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { login } from '../actions/auth'
 import { startLoadingGiftLists } from '../actions/giftList'
 import { LoginScreen } from '../components/login/LoginScreen'
+import { ErrorPage } from '../components/pageErrors/ErrorPage'
+import { Page404 } from '../components/pageErrors/Page404'
 import { RegisterScreen } from '../components/register/RegisterScreen'
 import { ResetPasswordScreen } from '../components/resetPassword/ResetPasswordScreen'
 import { LoadingScreen } from '../components/ui/LoadingScreen'
@@ -31,16 +33,19 @@ export const AppRouter = () => {
     })
   }, [dispatch, setChecking, setIsLoggedIn])
 
+  console.log('Approuter')
+
   if (checking) {
     return <LoadingScreen />
   } else {
     return (
-      <BrowserRouter basename={process.env.PUBLIC_URL}>
+      <BrowserRouter basename="/giftListApp">
         <Routes>
-          <Route path='/login' element={<PublicRouter isLoggedIn={ isLoggedIn } component={LoginScreen} />} />
-          <Route path='/register' element={<PublicRouter isLoggedIn={ isLoggedIn } component={RegisterScreen} />} />
-          <Route path='/resetPassword' element={<PublicRouter isLoggedIn={ isLoggedIn } component={ResetPasswordScreen} />} />
-          <Route path='/*' isLoggedIn={isLoggedIn} element={<PrivateRouter isLoggedIn={ isLoggedIn } component={GiftListRouter}/>} />
+          <Route path='login' element={<PublicRouter isLoggedIn={ isLoggedIn } component={LoginScreen} />} />
+          <Route path='register' element={<PublicRouter isLoggedIn={ isLoggedIn } component={RegisterScreen} />} />
+          <Route path='resetPassword' element={<PublicRouter isLoggedIn={ isLoggedIn } component={ResetPasswordScreen} />} />
+          <Route path='/*' isLoggedIn={isLoggedIn} element={<PrivateRouter isLoggedIn={ isLoggedIn } component={GiftListRouter}/>} errorElement={<ErrorPage />} />
+          <Route path='*' element={<Page404 />} errorElement={<ErrorPage />} />
         </Routes>
       </BrowserRouter>
     )

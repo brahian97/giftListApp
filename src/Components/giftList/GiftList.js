@@ -1,13 +1,39 @@
 import { Field, FieldArray, Form, Formik } from "formik";
 import { constants } from '../../constants/constants';
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { saveGiftList } from '../../actions/giftList';
 import { GiftCard } from './GiftCard';
+import Swal from "sweetalert2";
+import { generateURL } from "../../helpers/giftListHelpers";
 
 export const GiftList = ({ giftList }) => {
 
   const dispatch = useDispatch()
+  const { uid } = useSelector(state => state.auth)
+
+  const handleShare = () => {
+    navigator.clipboard.writeText(generateURL(uid, giftList.id))
+    .then(() => {
+      Swal.fire({
+        showConfirmButton: false,
+        timer: 800,
+        timerProgressBar: true,
+        title: 'Enlace copiado al portapapeles',
+        customClass: {
+          title: 'modal-title'
+        }
+      })
+    })
+    .catch(err => {
+      Swal.fire({
+        showConfirmButton: false,
+        timer: 800,
+        timerProgressBar: true,
+        title: `Ha ocurrido un error al copiar el enlace. ${err}`
+      })
+    });
+  }
 
   return (
     <Formik
@@ -32,6 +58,11 @@ export const GiftList = ({ giftList }) => {
             render={gifts => (
               <>
                 <div className='row'>
+                  <div className='col-auto d-flex justify-content-denter align-items-center'>
+                    <svg xmlns="http://www.w3.org/2000/svg" width='16' height='16' viewBox="0 0 512 512" onClick={handleShare} role='button'>
+                      <path d="M512 208L320 384H288V288H208c-61.9 0-112 50.1-112 112c0 48 32 80 32 80s-128-48-128-176c0-97.2 78.8-176 176-176H288V32h32L512 208z" />
+                    </svg>
+                  </div>
                   <h4 className='col text-center my-4'>Regalos</h4>
                   <div className='col-auto d-flex justify-content-denter align-items-center'>
                     <svg xmlns="http://www.w3.org/2000/svg" width='16' height='16' viewBox="0 0 448 512" onClick={() => gifts.push({ ...constants.NEW_GIFT })} role='button'>
@@ -42,7 +73,7 @@ export const GiftList = ({ giftList }) => {
                 <div className='row row-cols-1 row-cols-md-3 g-4 card-deck'>
                   {
                     values.gifts.map((gift, index) => (
-                      <GiftCard gift={gift} key={index} handleDelete={() => {gifts.remove(index)}} handleUpdate={(newValues) => {values.gifts[index] = newValues}}/>
+                      <GiftCard gift={gift} key={index} handleDelete={() => { gifts.remove(index) }} handleUpdate={(newValues) => { values.gifts[index] = newValues }} />
                     ))
                   }
                 </div>

@@ -64,16 +64,18 @@ export const GiftCard = ({ gift, handleDelete, handleUpdate }) => {
   return (
     <div className='col'>
       <div className='card h-100 shadow'>
-        <div className="card-header d-flex justify-content-end">
-          <OverlayTrigger
-            placement="bottom"
-            delay={{ show: 50, hide: 300 }}
-            overlay={<Tooltip>Eliminar</Tooltip>}>
-            <svg xmlns="http://www.w3.org/2000/svg" width='16' height='16' viewBox="0 0 320 512" role='button' onClick={handleDelete}>
-              <path d="M310.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 210.7 54.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L114.7 256 9.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 301.3 265.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L205.3 256 310.6 150.6z" />
-            </svg>
-          </OverlayTrigger>
-        </div>
+        {handleDelete &&
+          <div className="card-header d-flex justify-content-end">
+            <OverlayTrigger
+              placement="bottom"
+              delay={{ show: 50, hide: 300 }}
+              overlay={<Tooltip>Eliminar</Tooltip>}>
+              <svg xmlns="http://www.w3.org/2000/svg" width='16' height='16' viewBox="0 0 320 512" role='button' onClick={handleDelete}>
+                <path d="M310.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 210.7 54.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L114.7 256 9.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 301.3 265.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L205.3 256 310.6 150.6z" />
+              </svg>
+            </OverlayTrigger>
+          </div>
+        }
         <img src={Image} className="card-img-top" alt="gift"></img>
         <div className='card-body w-100' onClick={handleActivateGift} role='button'>
           <h6 className='card-title'>{name ? name : '-'}</h6>
@@ -89,5 +91,6 @@ export const GiftCard = ({ gift, handleDelete, handleUpdate }) => {
 
 GiftCard.propTypes = {
   gift: PropTypes.object.isRequired,
-  handleDelete: PropTypes.func.isRequired
+  handleDelete: PropTypes.func.isRequired,
+  handleUpdate: PropTypes.func.isRequired
 }

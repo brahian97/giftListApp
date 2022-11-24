@@ -30,3 +30,4 @@ export const findGiftListById = async (id, uid) => {
   return {id: gifListSnap.id, ...gifListSnap.data(), gifts: [...gifts]}
 }
 
+export const generateURL = (uid, giftListId) => `${window.location.host}/giftListApp/share/${uid}/${giftListId}`
