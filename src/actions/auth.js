@@ -61,7 +61,7 @@ export const registerWithEmail = (email, password, name) => {
         dispatch(login(user.uid, user.displayName, user.email))
       }).catch(
         err => {
-          console.log(err.code)
+          console.error(err.code)
           dispatch(setError(err.code))
         }
       )

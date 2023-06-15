@@ -56,9 +56,6 @@ export const saveGiftList = (giftList) => {
     const giftListToFirestore = { ...giftList }
     delete giftListToFirestore.id
 
-    console.log('------------------ SaveGiftList ------------------')
-    console.log('activate: ', active.gifts)
-    console.log('giftList: ', giftList.gifts)
     //Eliminar los regalos inexistentes
     active.gifts.forEach(gift => {
       giftList.gifts.find(element => element.id === gift.id) === undefined &&
@@ -66,13 +63,11 @@ export const saveGiftList = (giftList) => {
     })
 
     giftList.gifts.forEach(async gift => {
-      console.log('gift to save: ', gift)
       try {
         if (gift.id) {
           db.collection(`${uid}/giftLists/lists/${giftList.id}/gifts`).doc(gift.id).set(gift)
         } else {
           const nuevo = await db.doc(`${uid}/giftLists/lists/${giftList.id}`).collection('gifts').add(gift)
-          console.log('Nuevo: ', nuevo)
         }
       } catch (err) {
         Swal.fire('Error', err.message, 'error')
@@ -87,8 +82,6 @@ export const saveGiftList = (giftList) => {
       giftsSnap.forEach(gift => { gifts.push({ id: gift.id, ...gift.data() }) })
       dispatch(refreshGiftList(giftList.id, giftList))
       dispatch(activeGiftList(giftList.id, { ...giftList, gifts }))
-      console.log('GIFTS: ', giftList.gifts)
-      //await db.doc(`${uid}/giftLists/lists/${giftList.id}`).get()
       Swal.fire('Lista de regalos guardada', '', 'success')
     }).catch(err => {
       Swal.fire('Error', err.message, 'error')

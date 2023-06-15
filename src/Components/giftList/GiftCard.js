@@ -22,7 +22,6 @@ export const GiftCard = ({ gift, handleDelete, handleUpdate }) => {
       html: <Formik
         initialValues={gift}
         onSubmit={values => {
-          console.log('newValues: ', values)
           handleUpdate(values)
           Swal.fire({
             timer: 1000,
@@ -78,9 +77,9 @@ export const GiftCard = ({ gift, handleDelete, handleUpdate }) => {
           </div>
         }
         <img src={Image} className="card-img-top" alt="gift"></img>
-        <div className='card-body w-100' onClick={handleActivateGift} role='button'>
-          <h6 className='card-title'>{name ? name : '-'}</h6>
-          <p><span>$</span>{price ? cop.format(price) : '0.00'}</p>
+        <div className='card-body w-100 py-0 pt-1' onClick={handleActivateGift} role='button'>
+          <h6 className='card-title text-center'>{name ? name : '-'}</h6>
+          <p className='mb-1'><span>$</span>{price ? cop.format(price) : '0.00'}</p>
         </div>
         <div className='card-footer justify-content-center text-muted p-2'>
           <p style={{ marginBottom: '0' }}>Creado, <span>{parseGiftListDate(createdAt)}</span></p>

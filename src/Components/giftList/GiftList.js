@@ -13,10 +13,6 @@ export const GiftList = ({ giftList }) => {
   const { uid } = useSelector(state => state.auth)
   const { active } = useSelector(state => state.giftLists)
 
-  /* useEffect(() => {
-    console.log('Active has changed ', active)
-  }, [active]) */
-
   const handleShare = () => {
     navigator.clipboard.writeText(generateURL(uid, giftList.id))
     .then(() => {
@@ -45,12 +41,11 @@ export const GiftList = ({ giftList }) => {
       enableReinitialize 
       initialValues={{ ...active }}
       onSubmit={values => {
-        console.log('GiftList to save: ', values)
         dispatch(saveGiftList(values));
       }}
     >
       {({ values }) => (
-        <Form className='container my-5 rounded border border-dark py-4 px-5'>
+        <Form id='form-giftlist' className='container my-lg-5 mt-sm-4 mt-2 rounded border border-dark py-4 px-4 px-lg-5'>
           <div className='row' style={{ height: '50px' }}>
             <Field
               type="text"
@@ -77,10 +72,10 @@ export const GiftList = ({ giftList }) => {
                     </svg>
                   </div>
                 </div>
-                <div className='row row-cols-1 row-cols-md-4 g-4 card-deck'>
+                <div className='row row-cols-1 row-cols-md-3 g-4 card-deck'>
                   {
                     values.gifts.map((gift, index) => (
-                      <GiftCard gift={gift} key={index} handleDelete={() => { gifts.remove(index) }} handleUpdate={(newValues) => { console.log('values unmodified: ', values.gifts); values.gifts[index] = newValues; console.log('values modified: ', values.gifts); dispatch(saveGiftList(values)) }} />
+                      <GiftCard gift={gift} key={index} handleDelete={() => { gifts.remove(index) }} handleUpdate={(newValues) => { values.gifts[index] = newValues; dispatch(saveGiftList(values)) }} />
                     ))
                   }
                 </div>
