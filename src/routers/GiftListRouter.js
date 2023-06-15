@@ -5,7 +5,6 @@ import { Page404 } from "../components/pageErrors/Page404";
 import { GiftListShareScreen } from "../components/share/GiftListShareScreen";
 
 export const GiftListRouter = () => {
-  console.log('-giftListRouter')
   return (
     <>
       <Routes>

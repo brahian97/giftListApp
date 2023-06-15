@@ -2,7 +2,6 @@ import PropTypes from 'prop-types'
 import { Navigate } from 'react-router-dom'
 
 export const PrivateRouter = ({component: Component, isLoggedIn}) => {
-  console.log('---private', isLoggedIn)
   return !isLoggedIn ? <Navigate to="/login" replace={true} /> : <Component />
 }
 

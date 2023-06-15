@@ -29,7 +29,7 @@ export const GiftListShareScreen = () => {
   const handleAddFavorite = () => {
     dispatch(addGiftListAsFavorite(userId, giftListId, giftList.title))
   }
-  console.log('--share')
+
   return finishLoad ? (
     <>
       <PageHeader />

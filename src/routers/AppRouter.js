@@ -33,8 +33,6 @@ export const AppRouter = () => {
     })
   }, [dispatch, setChecking, setIsLoggedIn])
 
-  console.log('Approuter')
-
   if (checking) {
     return <LoadingScreen />
   } else {

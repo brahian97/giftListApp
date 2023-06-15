@@ -1,3 +1,4 @@
+import { gif } from "@cloudinary/url-gen/qualifiers/format"
 import Swal from "sweetalert2"
 import { db } from "../firebase/firebaseConfig"
 import { loadfavoritesGiftLists } from "../helpers/favoritesHelpers"
@@ -33,12 +34,12 @@ export const activeGiftList = (id, giftList) => ({
 
 export const startLoadingGiftLists = () => {
   return async (dispatch, getState) => {
-      dispatch(startLoadingGiftList())
-      const { uid } = getState().auth
-      const giftLists = await loadGiftList(uid)
+    dispatch(startLoadingGiftList())
+    const { uid } = getState().auth
+    const giftLists = await loadGiftList(uid)
 
-      dispatch(setGiftLists(giftLists))
-      dispatch(finishLoadingGiftList())
+    dispatch(setGiftLists(giftLists))
+    dispatch(finishLoadingGiftList())
   }
 }
 
@@ -49,48 +50,49 @@ const setGiftLists = (giftLists) => ({
 
 export const saveGiftList = (giftList) => {
   return async (dispatch, getState) => {
-      const { uid } = getState().auth
-      const { active } = getState().giftLists
+    const { uid } = getState().auth
+    const { active } = getState().giftLists
 
-      const giftListToFirestore = { ...giftList }
-      delete giftListToFirestore.id
+    const giftListToFirestore = { ...giftList }
+    delete giftListToFirestore.id
 
-      console.log('activate: ', active)
-      console.log('giftList: ', giftList)
-      //Eliminar los regalos inexistentes
-      active.gifts.forEach(gift => {
-        giftList.gifts.find(element => element.id === gift.id) === undefined &&
-          db.collection(`${uid}/giftLists/lists/${giftList.id}/gifts`).doc(gift.id).delete()
-      })
+    //Eliminar los regalos inexistentes
+    active.gifts.forEach(gift => {
+      giftList.gifts.find(element => element.id === gift.id) === undefined &&
+        db.collection(`${uid}/giftLists/lists/${giftList.id}/gifts`).doc(gift.id).delete()
+    })
 
-      giftList.gifts.forEach(gift => {
-        try{
-          if(gift.id){
-            db.collection(`${uid}/giftLists/lists/${giftList.id}/gifts`).doc(gift.id).set(gift)
-          } else {
-            db.doc(`${uid}/giftLists/lists/${giftList.id}`).collection('gifts').add(gift)
-          }
-        }catch(err) {
-          Swal.fire('Error', err.message, 'error')
+    giftList.gifts.forEach(async gift => {
+      try {
+        if (gift.id) {
+          db.collection(`${uid}/giftLists/lists/${giftList.id}/gifts`).doc(gift.id).set(gift)
+        } else {
+          const nuevo = await db.doc(`${uid}/giftLists/lists/${giftList.id}`).collection('gifts').add(gift)
         }
-      })
+      } catch (err) {
+        Swal.fire('Error', err.message, 'error')
+      }
+    })
 
-      delete giftListToFirestore.gifts
+    delete giftListToFirestore.gifts
 
-      await db.doc(`${uid}/giftLists/lists/${giftList.id}`).update(giftListToFirestore).then(async () => {
-          dispatch(refreshGiftList(giftList.id, giftList))
-          //await db.doc(`${uid}/giftLists/lists/${giftList.id}`).get()
-          Swal.fire('Lista de regalos guardada', '', 'success')
-      }).catch(err => {
-          Swal.fire('Error', err.message, 'error')
-      })
+    db.doc(`${uid}/giftLists/lists/${giftList.id}`).update(giftListToFirestore).then(async () => {
+      const giftsSnap = await db.collection(`${uid}/giftLists/lists/${giftList.id}/gifts`).get()
+      const gifts = []
+      giftsSnap.forEach(gift => { gifts.push({ id: gift.id, ...gift.data() }) })
+      dispatch(refreshGiftList(giftList.id, giftList))
+      dispatch(activeGiftList(giftList.id, { ...giftList, gifts }))
+      Swal.fire('Lista de regalos guardada', '', 'success')
+    }).catch(err => {
+      Swal.fire('Error', err.message, 'error')
+    })
   }
 }
 
 export const refreshGiftList = (id, giftList) => ({
   type: types.giftListUpdate,
   payload: {
-      id, giftList
+    id, giftList
   }
 })
 
@@ -114,7 +116,6 @@ export const addGiftListAsFavorite = (userId, giftListId, giftListTitle) => {
   return async (dispatch, getState) => {
     const { uid } = getState().auth
     const profileSnap = await db.doc(`${uid}/profile`).get()
-    console.log()
 
     const newFavorite = {
       user: userId,
@@ -130,12 +131,12 @@ export const addGiftListAsFavorite = (userId, giftListId, giftListTitle) => {
 
 export const startLoadingfavoritesGiftLists = () => {
   return async (dispatch, getState) => {
-      dispatch(startLoadingFavoritesGiftList())
-      const { uid } = getState().auth
-      const favoritesGiftLists = await loadfavoritesGiftLists(uid)
+    dispatch(startLoadingFavoritesGiftList())
+    const { uid } = getState().auth
+    const favoritesGiftLists = await loadfavoritesGiftLists(uid)
 
-      dispatch(setFavoritesGiftLists(favoritesGiftLists))
-      dispatch(finishFavoritesGiftList())
+    dispatch(setFavoritesGiftLists(favoritesGiftLists))
+    dispatch(finishFavoritesGiftList())
   }
 }
 

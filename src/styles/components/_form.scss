@@ -9,7 +9,7 @@
 
   &-title {
     @include form-input;
-    font-size: 2rem;
+    font-size: 1.8rem;
     font-weight: bold;
   }
 
@@ -24,5 +24,13 @@
 
   & * {
     background-color: lighten($color: $primary, $amount: 15);
+  }
+}
+
+@media (max-width: 768px) {
+  div form#form-giftlist.border-dark {
+    border: none !important;
+    //margin-top: 20px !important;
+    //padding: 24px 24px !important;
   }
 }
