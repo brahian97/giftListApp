@@ -1,6 +1,6 @@
 import { Field, FieldArray, Form, Formik } from "formik";
 import { constants } from '../../constants/constants';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { saveGiftList } from '../../actions/giftList';
 import { GiftCard } from './GiftCard';
@@ -11,6 +11,11 @@ export const GiftList = ({ giftList }) => {
 
   const dispatch = useDispatch()
   const { uid } = useSelector(state => state.auth)
+  const { active } = useSelector(state => state.giftLists)
+
+  /* useEffect(() => {
+    console.log('Active has changed ', active)
+  }, [active]) */
 
   const handleShare = () => {
     navigator.clipboard.writeText(generateURL(uid, giftList.id))
@@ -37,8 +42,10 @@ export const GiftList = ({ giftList }) => {
 
   return (
     <Formik
-      initialValues={{ ...giftList }}
+      enableReinitialize 
+      initialValues={{ ...active }}
       onSubmit={values => {
+        console.log('GiftList to save: ', values)
         dispatch(saveGiftList(values));
       }}
     >
@@ -65,15 +72,15 @@ export const GiftList = ({ giftList }) => {
                   </div>
                   <h4 className='col text-center my-4'>Regalos</h4>
                   <div className='col-auto d-flex justify-content-denter align-items-center'>
-                    <svg xmlns="http://www.w3.org/2000/svg" width='16' height='16' viewBox="0 0 448 512" onClick={() => gifts.push({ ...constants.NEW_GIFT })} role='button'>
+                    <svg xmlns="http://www.w3.org/2000/svg" width='16' height='16' viewBox="0 0 448 512" onClick={() => gifts.unshift({ ...constants.NEW_GIFT })} role='button'>
                       <path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z" />
                     </svg>
                   </div>
                 </div>
-                <div className='row row-cols-1 row-cols-md-3 g-4 card-deck'>
+                <div className='row row-cols-1 row-cols-md-4 g-4 card-deck'>
                   {
                     values.gifts.map((gift, index) => (
-                      <GiftCard gift={gift} key={index} handleDelete={() => { gifts.remove(index) }} handleUpdate={(newValues) => { values.gifts[index] = newValues }} />
+                      <GiftCard gift={gift} key={index} handleDelete={() => { gifts.remove(index) }} handleUpdate={(newValues) => { console.log('values unmodified: ', values.gifts); values.gifts[index] = newValues; console.log('values modified: ', values.gifts); dispatch(saveGiftList(values)) }} />
                     ))
                   }
                 </div>

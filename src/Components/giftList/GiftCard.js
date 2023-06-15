@@ -22,6 +22,7 @@ export const GiftCard = ({ gift, handleDelete, handleUpdate }) => {
       html: <Formik
         initialValues={gift}
         onSubmit={values => {
+          console.log('newValues: ', values)
           handleUpdate(values)
           Swal.fire({
             timer: 1000,
