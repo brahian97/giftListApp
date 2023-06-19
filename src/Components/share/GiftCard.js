@@ -11,8 +11,6 @@ export const GiftCard = ({ gift }) => {
   const giftSwal = withReactContent(Swal)
   let cop = Intl.NumberFormat("es-ES");
 
-  const dispatch = useDispatch()
-
   const handleActivateGift = () => {
     giftSwal.fire({
       showConfirmButton: false,

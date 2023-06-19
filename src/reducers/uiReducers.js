@@ -1,4 +1,3 @@
-import { type } from "@testing-library/user-event/dist/type"
 import { authTypes } from "../types/authTypes"
 import { types } from "../types/types"
 

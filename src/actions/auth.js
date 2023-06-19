@@ -3,12 +3,6 @@ import { firebase, googleAuthProvider } from './../firebase/firebaseConfig'
 import { setError, startLoading, finishLoading } from './ui'
 import Swal from 'sweetalert2'
 import { db } from "../firebase/firebaseConfig"
-import withReactContent from 'sweetalert2-react-content'
-/*import { store } from './../store/store'
-import { Provider } from 'react-redux'
-import ModalProfile from '../components/profile/ModalProfile'
-
-const ReactSwal = withReactContent(Swal)*/
 
 export const startLoginEmailPassword = (email, password) => {
   return (dispatch) => {

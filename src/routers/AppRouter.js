@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { login } from '../actions/auth'
 import { startLoadingGiftLists } from '../actions/giftList'
 import { LoginScreen } from '../components/login/LoginScreen'
@@ -39,9 +39,9 @@ export const AppRouter = () => {
     return (
       <BrowserRouter basename="/giftListApp">
         <Routes>
-          <Route path='login' element={<PublicRouter isLoggedIn={ isLoggedIn } component={LoginScreen} />} />
-          <Route path='register' element={<PublicRouter isLoggedIn={ isLoggedIn } component={RegisterScreen} />} />
-          <Route path='resetPassword' element={<PublicRouter isLoggedIn={ isLoggedIn } component={ResetPasswordScreen} />} />
+          <Route path='/login' element={<PublicRouter isLoggedIn={ isLoggedIn } component={LoginScreen} />} />
+          <Route path='/register' element={<PublicRouter isLoggedIn={ isLoggedIn } component={RegisterScreen} />} />
+          <Route path='/resetPassword' element={<PublicRouter isLoggedIn={ isLoggedIn } component={ResetPasswordScreen} />} />
           <Route path='/*' isLoggedIn={isLoggedIn} element={<PrivateRouter isLoggedIn={ isLoggedIn } component={GiftListRouter}/>} errorElement={<ErrorPage />} />
           <Route path='*' element={<Page404 />} errorElement={<ErrorPage />} />
         </Routes>
