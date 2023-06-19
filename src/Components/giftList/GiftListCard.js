@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 import { activeGiftList, deleteGiftList } from '../../actions/giftList';
 import { parseGiftListDate } from '../../utils/utils';
 

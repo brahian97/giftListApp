@@ -30,7 +30,7 @@ export const FavoritesScreen = () => {
       <div className='container my-5 rounded border border-dark py-4 px-5'>
         <h3 className="text-center mb-3">Mis favoritos</h3>
         {
-          favorites.length == 0 ?
+          favorites.length === 0 ?
             (<p className="text-center my-0">No tienes ningún favorito</p>) :
             favorites.map(fav => (
               <div key={fav.id} className='container my-5 rounded border border-dark py-4 px-4 shadow favorite d-flex justify-content-between' onClick={() => { goToFavorite(fav) }} role='button'>

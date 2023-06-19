@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/giftListApp/static/css/main.14e96c41.css",
-    "main.js": "/giftListApp/static/js/main.7362999c.js",
+    "main.js": "/giftListApp/static/js/main.2b23f871.js",
     "static/media/gift.jpg": "/giftListApp/static/media/gift.d5409f1f04bac26cf7bc.jpg",
     "index.html": "/giftListApp/index.html",
     "main.14e96c41.css.map": "/giftListApp/static/css/main.14e96c41.css.map",
-    "main.7362999c.js.map": "/giftListApp/static/js/main.7362999c.js.map"
+    "main.2b23f871.js.map": "/giftListApp/static/js/main.2b23f871.js.map"
   },
   "entrypoints": [
     "static/css/main.14e96c41.css",
-    "static/js/main.7362999c.js"
+    "static/js/main.2b23f871.js"
   ]
 }

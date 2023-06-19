@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import Image from '../../assets/img/gift.jpg'
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
 import { parseGiftListDate } from '../../utils/utils';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content'
@@ -10,11 +9,11 @@ import { Field, Form, Formik } from 'formik';
 export const GiftCard = ({ gift, handleDelete, handleUpdate }) => {
 
   const { name, url, price, images, createdAt, updatedAt } = gift
-  const isPrivate = false
+  //const isPrivate = false
   const giftSwal = withReactContent(Swal)
   let cop = Intl.NumberFormat("es-ES");
 
-  const dispatch = useDispatch()
+  //const dispatch = useDispatch()
 
   const handleActivateGift = () => {
     giftSwal.fire({
